@@ -1,4 +1,6 @@
+'use client'
 import React from 'react'
+import posthog from 'posthog-js'
 import ExploreBtn from "@/components/ExploreBtn";
 import EventCard from "@/components/EventCard";
 import events from "@/lib/constants";
@@ -16,7 +18,7 @@ const Page = () => {
 
                 <ul className="events">
                     {events.map((event) => (
-                        <li key={event.title}>
+                        <li key={event.title} onClick={() => posthog.capture('event-card-clicked', { event_title: event.title })}>
                             <EventCard {...event} />
                         </li>
                     ))}
